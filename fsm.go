@@ -6,6 +6,8 @@ import (
 	"time"
 
 	"github.com/armon/go-metrics"
+
+	hcraft "github.com/hashicorp/raft"
 )
 
 // FSM provides an interface that can be implemented by
@@ -15,7 +17,7 @@ type FSM interface {
 	// It returns a value which will be made available in the
 	// ApplyFuture returned by Raft.Apply method if that
 	// method was called on the same Raft node as the FSM.
-	Apply(*Log) interface{}
+	Apply(*hcraft.Log) interface{}
 
 	// Snapshot is used to support log compaction. This call should
 	// return an FSMSnapshot which can be used to save a point-in-time
